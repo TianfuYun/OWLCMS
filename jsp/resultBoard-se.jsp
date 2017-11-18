@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false" import="org.concordiainternational.competition.ui.generators.*,org.concordiainternational.competition.ui.*,org.concordiainternational.competition.data.*,org.concordiainternational.competition.data.lifterSort.*"%>
+	pageEncoding="UTF-8" isELIgnored="false" import="org.concordiainternational.competition.ui.generators.*,org.concordiainternational.competition.ui.*,org.concordiainternational.competition.data.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html><!--
@@ -40,21 +40,14 @@
 	SessionData groupData = (SessionData)sCtx.getAttribute(SessionData.MASTER_KEY+platform);
 	if (groupData == null) return;
 
-    java.util.List<Lifter> lifters = groupData.getCurrentDisplayOrder();
+	java.util.List<Lifter> lifters = groupData.getCurrentDisplayOrder();
 	if (lifters == null || lifters.size() == 0) {
 		out.println("</head><body></body></html>");
 		out.flush();
 		return;
 	}
-	java.util.List<Lifter> sortedLiftersSnatchRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.SNATCH);
-	java.util.List<Lifter> sortedLiftersCleanJerkRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.CLEANJERK);
-	java.util.List<Lifter> sortedLiftersTotalRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.TOTAL);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersSnatchRank, LifterSorter.Ranking.SNATCH);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersCleanJerkRank, LifterSorter.Ranking.CLEANJERK);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersTotalRank, LifterSorter.Ranking.TOTAL);
-
-    pageContext.setAttribute("lifters", lifters);
-    pageContext.setAttribute("isMasters", Competition.isMasters());
+	pageContext.setAttribute("lifters", lifters);
+	pageContext.setAttribute("isMasters", Competition.isMasters());
 
 	CompetitionSession group = groupData.getCurrentSession();
 	if (group == null) {
@@ -69,7 +62,7 @@
 				);
 	}
 %>
-<title>Resultat</title>
+<title>Results</title>
 <link rel="stylesheet" type="text/css" href="${style}" />
 <!--  style type="text/css">
 .requestedWeight {
@@ -110,9 +103,7 @@
 			<th class='weight'>K.V.</th>
 			<th class='club'>Klubb</th>
 			<th colspan="3">Ryck</th>
-			<th class='cat'>Plac.</th>
 			<th colspan="3">Stöt</th>
-			<th class='cat'>Plac.</th>
 			<th>Totalt</th>
 			<th class="cat" style='text-align: center'>Plac.</th>
 		</tr>
@@ -194,14 +185,6 @@
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${lifter.bestSnatch > 0}">
-						<td class='cat'>${lifter.snatchRank}</td>
-					</c:when>
-					<c:otherwise>
-						<td class='cat'>&ndash;</td>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
 					<c:when test="${lifter.attemptsDone == 3}">
 						<c:choose>
 							<c:when test="${lifter.currentLifter}">
@@ -253,14 +236,6 @@
 					</c:when>
 					<c:otherwise>
 						<td class='weight'></td>
-					</c:otherwise>
-				</c:choose>
-				<c:choose>
-					<c:when test="${lifter.bestCleanJerk > 0}">
-						<td class='cat'>${lifter.cleanJerkRank}</td>
-					</c:when>
-					<c:otherwise>
-						<td class='cat'>&ndash;</td>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
