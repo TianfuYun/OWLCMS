@@ -49,9 +49,9 @@
 	java.util.List<Lifter> sortedLiftersSnatchRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.SNATCH);
 	java.util.List<Lifter> sortedLiftersCleanJerkRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.CLEANJERK);
 	java.util.List<Lifter> sortedLiftersTotalRank = LifterSorter.resultsOrderCopy(lifters, LifterSorter.Ranking.TOTAL);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersSnatchRank, LifterSorter.Ranking.SNATCH);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersCleanJerkRank, LifterSorter.Ranking.CLEANJERK);
-	LifterSorter.assignSinclairRanksAndPoints(sortedLiftersTotalRank, LifterSorter.Ranking.TOTAL);
+	LifterSorter.assignCategoryRanks(sortedLiftersSnatchRank, LifterSorter.Ranking.SNATCH);
+	LifterSorter.assignCategoryRanks(sortedLiftersCleanJerkRank, LifterSorter.Ranking.CLEANJERK);
+	LifterSorter.assignCategoryRanks(sortedLiftersTotalRank, LifterSorter.Ranking.TOTAL);
 
     pageContext.setAttribute("lifters", lifters);
     pageContext.setAttribute("isMasters", Competition.isMasters());
@@ -118,14 +118,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:set var="previousCatLifters" value="${0}"/>
 		<c:forEach var="lifter" items="${lifters}" varStatus="loop">
 			<jsp:useBean id="lifter" type="org.concordiainternational.competition.data.Lifter" />
-			<c:choose>
-				<c:when test="${lifter.shortCategory != lifters[loop.index-1].shortCategory}">
-						<c:set var="previousCatLifters" value="${loop.index}"/>
-				</c:when>
-			</c:choose>
 			<tr>
 				<td class='narrow' style='text-align: right'>${lifter.startNumber}&nbsp;</td>
 				<c:choose>
@@ -201,7 +195,7 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${lifter.bestSnatch > 0}">
-						<td class='cat'>${lifter.snatchRank - previousCatLifters}</td>
+						<td class='cat'>${lifter.snatchRank}</td>
 					</c:when>
 					<c:otherwise>
 						<td class='cat'>&ndash;</td>
@@ -263,7 +257,7 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${lifter.bestCleanJerk > 0}">
-						<td class='cat'>${lifter.cleanJerkRank - previousCatLifters}</td>
+						<td class='cat'>${lifter.cleanJerkRank}</td>
 					</c:when>
 					<c:otherwise>
 						<td class='cat'>&ndash;</td>
@@ -279,7 +273,7 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${lifter.totalRank > 0}">
-							<td class='cat'>${lifter.totalRank - previousCatLifters}</td>
+							<td class='cat'>${lifter.totalRank}</td>
 					</c:when>
 					<c:otherwise>
 						<td class='cat'>&ndash;</td>
