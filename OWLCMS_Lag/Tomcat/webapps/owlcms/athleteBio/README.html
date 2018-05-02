@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="fr-ca" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<style type="text/css">
+.underlined {
+	text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Instructions for Athlete Biographies</h1>
+<p>This document explains how to display athlete biographies automatically for 
+the current athlete.</p>
+<h2>Install an HTML editing program</h2>
+<p>For Windows, we recommend Microsoft Expression Web 4, which is a free 
+download (click
+<a href="https://www.microsoft.com/en-ca/download/details.aspx?id=36179">here</a> 
+to get it).&nbsp; The instructions that follow were tested using that program, 
+but they all pretty much work the same.</p>
+<h2>COPY the athleteBio directory to a safe location, and work there</h2>
+<p>Locate the athleteBio directory in your owlcms installation. If you are 
+running the Windows install, locate the "Competition Management" folder. There 
+will be a shortcut to the <code>athleteBio</code> directory.</p>
+<h2>Repeat the following steps for all the athletes</h2>
+<p>This will take a while.&nbsp; Don't say we did not warn you that showing 
+pictures was a cute but time-consuming idea.</p>
+<h2>1- Copy the picture for the athlete</h2>
+<ul>
+	<li>Get a membership or registration number for the athlete.&nbsp; If you 
+	are hosting a national championship and each state or province has a code, 
+	then prefix the code.<ul>
+		<li>In the athleteBio provided, you will find two files called qc4123.&nbsp; 
+		This is me as an example, where I am from Québec (qc) and have 
+		membership number 4123.</li>
+		<li class="auto-style1"><span class="underlined">You will be entering 
+		this membership number on the "Registration" page in the program 
+		(leftmost cell on the page) -- This is how the program will locate the 
+		athlete's file.</span></li>
+	</ul>
+	</li>
+	<li>Get a suitably sized picture for the athlete.&nbsp; You need a passport 
+	picture shape, or a square.&nbsp; If the file is very large, use a program 
+	to resize it to something more sensible.&nbsp; You want 400 pixels wide 
+	ideally.</li>
+	<li>Rename the picture using the membership number.&nbsp; In my example, I 
+	renamed my picture qc4123.jpg</li>
+	<li>Add the file to the athleteBio folder.</li>
+	<li>PRO TIP: if taking pictures of a lot of athletes, do it "mug shot 
+	style", with each athlete holding his or her registration number.&nbsp; Then 
+	crop the pictures :-) <span class="underlined"><strong>after</strong></span> 
+	renaming the files.</li>
+</ul>
+<h2>2- Create the bio file and link it to the proper picture</h2>
+<ul>
+	<li>Start your HTML editor, open the file called "sampleAthlete.html"</li>
+	<li>Save the file under the membership as entered in the owlcms program: in 
+	our example, I saved my file as qc4123.html</li>
+	<li>Right-Click on the picture in the file , and select "Picture 
+	Properties". Change the file name to the proper membership name (e.g. 
+	qc4123.jpg).</li>
+	<li>Edit the information as you see fit.&nbsp; Note that you don't need to 
+	provide the name on the page the owlcms program will do that, as well as the 
+	current weight, etc.</li>
+	<li>It is however a good idea to set the "title" of the page to be that of 
+	the lifter.&nbsp; To do this, click on the "split" tab at the bottom left of 
+	the page, and locate the "&lt;title&gt;" section.&nbsp; Replace "Sample Athlete" 
+	with the </li>
+</ul>
+<h2>Copy back all your files to the official athleteBio directory</h2>
+<p>You're all set to go.&nbsp; You can add files as you wish, or even fix files 
+during the competition.&nbsp; The files are looked-up anew every time they are 
+shown.</p>
+
+</body>
+</html>
