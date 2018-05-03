@@ -72,7 +72,8 @@ if (currentlifters.get(0).getGender().contains("F")) {
 	lifters = sortedMen;
 	liftersPerTeam = 6;
 }
-
+pageContext.setAttribute("currentFirstName", currentlifters.get(0).getFirstName());
+pageContext.setAttribute("currentLastName", currentlifters.get(0).getLastName());
 pageContext.setAttribute("lifters", lifters);
 pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 
@@ -86,7 +87,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 	body {
 		zoom: 1.5;
 	}
-	.requestedWeight {
+	.requestedWeight, .currentWeight {
 		color: navy;
 		font-size: medium;
 		font-style: italic;
@@ -160,7 +161,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<jsp:useBean id="lifter1" type="org.concordiainternational.competition.data.Lifter"/>
 		<tr>
 			<c:choose>
-				<c:when test="${lifter1.currentLifter}">
+				<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 					<td class='name current'><nobr>${lifter1.lastName}, <%= lifter1.getFirstName().substring(0,1) %></nobr></td>
 				</c:when>
 				<c:otherwise>
@@ -170,7 +171,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 			<c:choose>
 			<c:when test="${lifter1.snatchAttemptsDone == 0}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -188,7 +189,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter1.snatchAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -206,7 +207,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter1.snatchAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -224,7 +225,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter1.attemptsDone == 3}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -242,7 +243,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter1.cleanJerkAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -260,7 +261,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter1.cleanJerkAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter1.currentLifter}">
+					<c:when test="${lifter1.firstName == currentFirstName && lifter1.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter1.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -320,7 +321,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<jsp:useBean id="lifter2" type="org.concordiainternational.competition.data.Lifter"/>
 		<tr>
 			<c:choose>
-				<c:when test="${lifter2.currentLifter}">
+				<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 					<td class='name current'><nobr>${lifter2.lastName}, <%= lifter2.getFirstName().substring(0,1) %></nobr></td>
 				</c:when>
 				<c:otherwise>
@@ -330,7 +331,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 			<c:choose>
 			<c:when test="${lifter2.snatchAttemptsDone == 0}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -348,7 +349,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter2.snatchAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -366,7 +367,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter2.snatchAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -384,7 +385,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter2.attemptsDone == 3}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -402,7 +403,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter2.cleanJerkAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -420,7 +421,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter2.cleanJerkAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter2.currentLifter}">
+					<c:when test="${lifter2.firstName == currentFirstName && lifter2.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter2.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -475,7 +476,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<jsp:useBean id="lifter3" type="org.concordiainternational.competition.data.Lifter"/>
 		<tr>
 			<c:choose>
-				<c:when test="${lifter3.currentLifter}">
+				<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 					<td class='name current'><nobr>${lifter3.lastName}, <%= lifter3.getFirstName().substring(0,1) %></nobr></td>
 				</c:when>
 				<c:otherwise>
@@ -485,7 +486,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 			<c:choose>
 			<c:when test="${lifter3.snatchAttemptsDone == 0}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -503,7 +504,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter3.snatchAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -521,7 +522,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter3.snatchAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -539,7 +540,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter3.attemptsDone == 3}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -557,7 +558,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter3.cleanJerkAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -575,7 +576,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter3.cleanJerkAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter3.currentLifter}">
+					<c:when test="${lifter3.firstName == currentFirstName && lifter3.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter3.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -626,7 +627,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<jsp:useBean id="lifter4" type="org.concordiainternational.competition.data.Lifter"/>
 		<tr>
 			<c:choose>
-				<c:when test="${lifter4.currentLifter}">
+				<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 					<td class='name current'><nobr>${lifter4.lastName}, <%= lifter4.getFirstName().substring(0,1) %></nobr></td>
 				</c:when>
 				<c:otherwise>
@@ -636,7 +637,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 			<c:choose>
 			<c:when test="${lifter4.snatchAttemptsDone == 0}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -654,7 +655,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter4.snatchAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -672,7 +673,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter4.snatchAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -690,7 +691,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter4.attemptsDone == 3}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -708,7 +709,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter4.cleanJerkAttemptsDone == 1}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>
@@ -726,7 +727,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		<c:choose>
 			<c:when test="${lifter4.cleanJerkAttemptsDone == 2}">
 				<c:choose>
-					<c:when test="${lifter4.currentLifter}">
+					<c:when test="${lifter4.firstName == currentFirstName && lifter4.lastName == currentLastName}">
 						<td class='currentWeight'>${lifter4.nextAttemptRequestedWeight}</td>
 					</c:when>
 					<c:otherwise>

@@ -41,37 +41,69 @@ if (currentlifters.get(0).getGender().contains("F")) {
 	lifters = sortedMen;
 }
 
+pageContext.setAttribute("currentFirstName", currentlifters.get(0).getFirstName());
+pageContext.setAttribute("currentLastName", currentlifters.get(0).getLastName());
 pageContext.setAttribute("lifters", lifters);
 
 %>
 <c:forEach var="lifter" items="${lifters}">
 <jsp:useBean id="lifter" type="org.concordiainternational.competition.data.Lifter"/>${lifter.club},${lifter.lastName},<%= lifter.getFirstName().substring(0,1) %>,<c:choose>
-	<c:when test="${lifter.snatchAttemptsDone == 0}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter.snatchAttemptsDone == 0}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.snatchAttemptsDone > 0 }"><%= lifter.getSnatch1ActualLift() %>,</c:when>
 	<c:otherwise>,</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${lifter.snatchAttemptsDone == 1}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter.snatchAttemptsDone == 1}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.snatchAttemptsDone > 1}"><%= lifter.getSnatch2ActualLift() %>,</c:when>
 	<c:otherwise>,</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${lifter.snatchAttemptsDone == 2}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter.snatchAttemptsDone == 2}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.snatchAttemptsDone > 2}"><%= lifter.getSnatch3ActualLift() %>,</c:when>
 	<c:otherwise>,</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${lifter.attemptsDone == 3}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter1.cleanJerkAttemptsDone == 0}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.cleanJerkAttemptsDone > 0}"><%= lifter.getCleanJerk1ActualLift() %>,</c:when>
 	<c:otherwise>r<%= lifter.getRequestedWeightForAttempt(4) %>,</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${lifter.cleanJerkAttemptsDone == 1}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter1.cleanJerkAttemptsDone == 1}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.cleanJerkAttemptsDone > 1}"><%= lifter.getCleanJerk2ActualLift() %>,</c:when>
 	<c:otherwise>,</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${lifter.cleanJerkAttemptsDone == 2}">r${lifter.nextAttemptRequestedWeight},</c:when>
+	<c:when test="${lifter1.cleanJerkAttemptsDone == 2}">
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">c${lifter.nextAttemptRequestedWeight},</c:when>
+			<c:otherwise>r${lifter.nextAttemptRequestedWeight},</c:otherwise>
+		</c:choose>
+	</c:when>
 	<c:when test="${lifter.cleanJerkAttemptsDone > 2}"><%= lifter.getCleanJerk3ActualLift() %>,</c:when>
 	<c:otherwise>,</c:otherwise>
 </c:choose><%= String.format(locale, "%.4f",lifter.getSinclairFactor()) %>,<c:choose>
