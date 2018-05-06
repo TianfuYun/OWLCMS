@@ -133,7 +133,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 		padding-left: 30px;
 		padding-right: 30px;
 	}
-	.current, currentWeight {
+	.current, .currentWeight {
 		background-color: #00ffd9;
 	}
 	.coming, .comingWeight {
