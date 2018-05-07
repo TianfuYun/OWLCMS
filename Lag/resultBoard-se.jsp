@@ -90,9 +90,6 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 <link href="${style}" rel="stylesheet" type="text/css">
 
 <style type="text/css">
-	body {
-		zoom: 1.5;
-	}
 	.requestedWeight, .currentWeight, .comingWeight, .comingWeight2, .comingWeight3{
 		color: navy;
 		font-size: medium;
@@ -160,15 +157,15 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 <table>
 	<!-- create 2 table headers above the 2 upper most team tables -->
 	<c:if test="${loop.index == 0 || loop.index == liftersPerTeam}">
-		<thead>
-			<tr>
-				<th>Namn</th>
-				<th colspan="3">Ryck</th>
-				<th colspan="3">Stöt</th>
-				<th>Koeff.</th>
-				<th>Sinclair</th>
-			</tr>
-		</thead>
+	<thead>
+		<tr>
+			<th>Namn</th>
+			<th colspan="3">Ryck</th>
+			<th colspan="3">Stöt</th>
+			<th>Koeff.</th>
+			<th>Sinclair</th>
+		</tr>
+	</thead>
 	</c:if>
 	<tbody>
 		<tr>
@@ -181,364 +178,113 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 			<td class="team" colspan="9">${lifter.club}</td>
 		</tr>
 	</c:if>
-		<tr>
-			<c:choose>
-				<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">
-					<td class='name current'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 0}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 0 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.attemptsDone == 3}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.attemptsDone > 3 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:when test="${lifter.firstName == comingFirstName && lifter.lastName == comingLastName}">
-					<td class='name coming'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 0}">
-							<td class='comingWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 0 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.attemptsDone == 3}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.attemptsDone > 3 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:when test="${lifter.firstName == comingFirstName2 && lifter.lastName == comingLastName2}">
-					<td class='name coming2'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 0}">
-							<td class='comingWeight2'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 0 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.attemptsDone == 3}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.attemptsDone > 3 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:when test="${lifter.firstName == comingFirstName3 && lifter.lastName == comingLastName3}">
-					<td class='name coming3'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 0}">
-							<td class='comingWeight3'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 0 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.attemptsDone == 3}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.attemptsDone > 3 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<td class='name'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %><nobr></td>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 0}">
-							<td class='requestedWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 0 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.snatchAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.snatchAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.attemptsDone == 3}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.attemptsDone > 3 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
-							<td class='currentWeight'>${lifter.nextAttemptRequestedWeight}</td>
-						</c:when>
-						<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
-							<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
-						</c:when>
-						<c:otherwise>
-							<td class='weight'></td>
-						</c:otherwise>
-					</c:choose>
-				</c:otherwise>
-			</c:choose>
-			<td class='weight'><%= String.format(locale, "%.4f",lifter.getSinclairFactor()) %></td>
-			<c:choose>
-				<c:when test="${lifter.sinclair > 0}">
-					<td class='cat'><%= String.format(locale, "%.2f",lifter.getSinclair()) %></td>
-				</c:when>
-				<c:otherwise>
-					<td class='cat'><%= String.format(locale, "%.2f", lifter.getBestSnatch() * lifter.getSinclairFactor()) %></td>
-				</c:otherwise>
-			</c:choose>
-		</tr>
+	<tr>
+		<c:choose>
+			<c:when test="${lifter.firstName == currentFirstName && lifter.lastName == currentLastName}">
+				<c:set var="nameformat" value="name current"/>
+				<c:set var="weightformat" value="currentWeight"/>
+			</c:when>
+			<c:when test="${lifter.firstName == comingFirstName && lifter.lastName == comingLastName}">
+				<c:set var="nameformat" value="name coming"/>
+				<c:set var="weightformat" value="comingWeight"/>
+			</c:when>
+			<c:when test="${lifter.firstName == comingFirstName2 && lifter.lastName == comingLastName2}">
+				<c:set var="nameformat" value="name coming2"/>
+				<c:set var="weightformat" value="comingWeight2"/>
+			</c:when>
+			<c:when test="${lifter.firstName == comingFirstName3 && lifter.lastName == comingLastName3}">
+				<c:set var="nameformat" value="name coming3"/>
+				<c:set var="weightformat" value="comingWeight3"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="nameformat" value="name"/>
+				<c:set var="weightformat" value="weight"/>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
+				<td class='name'><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
+			</c:when>
+			<c:otherwise>
+				<td class="${nameformat}"><nobr>${lifter.lastName}, <%= lifter.getFirstName().substring(0,1) %></nobr></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.snatchAttemptsDone == 0}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.snatchAttemptsDone > 0 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch1ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.snatchAttemptsDone == 1}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.snatchAttemptsDone > 1 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch2ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.snatchAttemptsDone == 2}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.snatchAttemptsDone > 2 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getSnatch3ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.attemptsDone == 3}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.attemptsDone > 3 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk1ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'><%= lifter.getRequestedWeightForAttempt(4) %></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.cleanJerkAttemptsDone == 1}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.cleanJerkAttemptsDone > 1 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk2ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'></td>
+			</c:otherwise>
+		</c:choose>
+		<c:choose>
+			<c:when test="${lifter.cleanJerkAttemptsDone == 2}">
+				<td class="${weightformat}">${lifter.nextAttemptRequestedWeight}</td>
+			</c:when>
+			<c:when test="${lifter.cleanJerkAttemptsDone > 2 }">
+				<%= WeightFormatter.htmlFormatWeight(lifter.getCleanJerk3ActualLift()) %>
+			</c:when>
+			<c:otherwise>
+				<td class='weight'></td>
+			</c:otherwise>
+		</c:choose>
+		<td class='weight'><%= String.format(locale, "%.4f",lifter.getSinclairFactor()) %></td>
+		<c:choose>
+			<c:when test="${lifter.sinclair > 0}">
+				<td class='cat'><%= String.format(locale, "%.2f",lifter.getSinclair()) %></td>
+			</c:when>
+			<c:otherwise>
+				<td class='cat'><%= String.format(locale, "%.2f", lifter.getBestSnatch() * lifter.getSinclairFactor()) %></td>
+			</c:otherwise>
+		</c:choose>
+	</tr>
 	<!-- put the total Sinclair under each team table, the score is inserted with javascript -->
 	<c:if test="${(loop.index + 1) % liftersPerTeam == 0}">
 		<tr>
@@ -552,7 +298,7 @@ pageContext.setAttribute("liftersPerTeam", liftersPerTeam);
 <c:if test="${(loop.index + 1) % (liftersPerTeam * 2) == 0}"></tr></c:if>	
 </c:forEach>
 </table>
-<script>
+<script> //sum up the scores for each team and append it to the bottom of the tables
 let tables = document.getElementsByClassName('outer');
 for (let i = 0; i < tables.length; i++) {
 	let Sinclairs = tables[i].getElementsByClassName('cat');
