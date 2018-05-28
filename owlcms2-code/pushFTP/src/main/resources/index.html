@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var refreshDelay = 5000;
+    var counter = 0;
+    //var maxLoops = 5; // for testing
+
+    function refreshContents(){
+      $("#scoreBoard").load("scoreBoard.html");
+      //$("#counter").html(counter);  // for testing
+    };
+
+    function repeatAfterTimeout() {
+    	counter++;
+        //if (counter >= maxLoops) return;  // for testing
+
+        setTimeout(function() {
+        	refreshContents();
+        	repeatAfterTimeout();
+        }, refreshDelay);
+    };
+
+	$(function () {refreshContents(); repeatAfterTimeout();})()
+    </script>
+</head>
+<body>
+	<H1>Test Competition</H1>
+	<div id="scoreBoard"></div>
+	<br />
+	<div>
+	<script type="text/javascript">
+/* <![CDATA[ */
+document.write('<s'+'cript type="text/javascript" src="//en.ad.altervista.org/js.ad/size=300X250/?ref='+encodeURIComponent(location.hostname+location.pathname)+'&r='+new Date().getTime()+'"></s'+'cript>');
+/* ]]> */
+</script>
+	</div>
+	<!--  <div id="counter" />  for testing -->
+</body>
+</html>

@@ -1,0 +1,8 @@
+Release Notes
+=============
+
+Release 1.2
+--------------
+- Improvement: new parameter to force an update when the ftp server has a timeout; for example ftpServerTimeOut=300000 (the time is in milliseconds) would be appropriate if the server times out after 300s (5 minutes). The program allocates one extra second as a margin of safety.
+- Improvement: the program will drop the connection and reset it if there is an error.  up to 10 attempts will be made.
+- Improvement: new parameter to determine where the index.html, style.css and scoreBoard.html files will be copied; ftpChangeDir=competition would change the working directory to "competition".

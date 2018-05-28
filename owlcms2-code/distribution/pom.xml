@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2009-2012, Jean-François Lamy
+
+  This Source Code Form is subject to the terms of the Mozilla Public License,
+  v. 2.0. If a copy of the MPL was not distributed with this file,
+  You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.concordiainternational</groupId>
+	<artifactId>distribution</artifactId>
+	<version>2.19.12</version>
+
+	<!--  parent>
+		<artifactId>owlcmsParent</artifactId>
+		<groupId>org.concordiainternational</groupId>
+		<version>1.0.0</version>
+		<relativePath>../owlcmsParent</relativePath>
+	</parent -->
+
+	<dependencies>
+		<dependency>
+			<groupId>org.concordiainternational</groupId>
+			<artifactId>owlcms</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>useExternalRepositories</id>
+		</profile>
+	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>distro-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<finalName>owlcms-${project.version}</finalName>
+					<descriptors>
+						<descriptor>src/assemble/linux.xml</descriptor>
+						<descriptor>src/assemble/windows.xml</descriptor>
+						<descriptor>src/assemble/war.xml</descriptor>
+						<descriptor>src/assemble/doc.xml</descriptor>
+					</descriptors>
+                   <tarLongFileMode>posix</tarLongFileMode>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>nsis-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate-headerfile</goal>
+							<goal>make</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<target>
+						<property file="sourceforge.properties" />
+						<property name="targetVersion" value="${project.version}" />
+						<property name="targetDirBaseName" value="${targetVersion}" /> <!-- add a .test suffix for testing -->
+						<property name="stagingParent" value="target/remote" />
+						<property name="stagingDir" value="${stagingParent}/${targetDirBaseName}" />
+
+						<delete dir="${stagingParent}" />
+						<mkdir dir="${stagingDir}" />
+
+						<!-- release files, in a folder with the version number -->
+						<copy file="../owlcms/doc/web/ReleaseNotes.md"
+							tofile="${stagingDir}/README.md" />
+						<copy file="target/owlcms-${targetVersion}-war/owlcms-${targetVersion}.war"
+							tofile="${stagingDir}/owlcms-${targetVersion}.war" />
+						<copy file="target/setup-${targetVersion}.exe"
+							tofile="${stagingDir}/owlcms-${targetVersion}.exe" />
+						<copy file="target/owlcms-${targetVersion}-linux.tar.gz"
+							tofile="${stagingDir}/owlcms-${targetVersion}-linux.tar.gz" />
+						<copy file="target/owlcms-${targetVersion}-doc.zip"
+							tofile="${stagingDir}/owlcms-${targetVersion}-doc.zip" />
+
+						 <!-- top-level files -->
+						<copy file="../owlcms/doc/web/ReleaseNotes.md"
+							tofile="${stagingParent}/README.md" /> <!-- this will override top-level README -->
+
+						<!-- perform the actual copy -->
+						<scp trust="true" failonerror="true" keyfile="${scp.keyfile}" passphrase="" todir="${scp.user}@${scp.host}:${scp.dir}">
+							<fileset dir="${stagingParent}" />
+					    </scp>
+
+					    <!-- copy web site -->
+                        <scp trust="true" failonerror="true" keyfile="${scp.keyfile}" passphrase="" todir="${scp.user}@${scp.web}:${scp.webdir}">
+                            <fileset dir="../owlcms/doc/web" />
+						</scp>
+					</target>
+				</configuration>
+				<dependencies>
+					<dependency>
+					    <groupId>org.apache.ant</groupId>
+					    <artifactId>ant-jsch</artifactId>
+					    <version>1.9.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<properties>
+		<nsis.makensis.bin>C:\Program Files (x86)\NSIS3\makensis.exe</nsis.makensis.bin>
+	</properties>
+</project>
